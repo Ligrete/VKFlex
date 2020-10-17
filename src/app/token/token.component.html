@@ -1,10 +1,26 @@
 <div class="container">
-  <div class="content">
-    <div class="text">BLa bla</div>
-    <button (click)="goLogIn()">go</button>
-    <div class="token">
-      <p>{{ token }}</p>
+  <ion-scroll scrollX="true" scrollY="true">
+    <div class="content">
+      <div class="text">Step 1</div>
+      <button (click)="goLogIn()">go</button>
+      <div class="token">
+        <h1>Token</h1>
+        <p>{{ token }}</p>
+      </div>
+      <div class="token">
+        <h1>Expires at</h1>
+        <p>{{ expiresTime }}</p>
+      </div>
+      <div class="token">
+        <h1>Response</h1>
+        <p>{{ response }}</p>
+      </div>
+  
+      <div class="token">
+        <h1>StorageToken</h1>
+        <p>{{ text }}</p>
+      </div>
+      <button (click)="redirect('feed')"> Redirect </button>
     </div>
-    <button (click)="manageToken()"> SAVE TOKEN </button>
-  </div>
+  </ion-scroll>
 </div>
