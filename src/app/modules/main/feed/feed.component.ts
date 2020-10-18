@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { Location } from '@angular/common';
@@ -17,7 +17,8 @@ export class FeedComponent implements OnInit {
     private storage: Storage,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private changeDetector: ChangeDetectorRef
   ) { }
 
 
@@ -27,6 +28,7 @@ export class FeedComponent implements OnInit {
 
   async loadstor() {
     this.token = await this.loadToken('token');
+    this.changeDetector.detectChanges();
   }
 
   async loadToken(key : string) : Promise<any> {

@@ -9,7 +9,7 @@
       </div>
       <div class="token">
         <h1>TokenBeh</h1>
-        <p>{{ token$ | async }}</p>
+        <p>{{ token$ }}</p>
       </div>
       <!-- <div class="token">
         <h1>Expires at</h1>
@@ -26,7 +26,9 @@
       </div> -->
       <button (click)="redirect('feed')"> Redirect </button>
       <button (click)="start()"> Get Token </button>
-      <button (click)="setDummy()"> Set Token</button>
+      <button (click)="setDummy('12313123321wqweqweqweqeqwewqweq')"> Set Token</button>
+      <button (click)="setDummy('asdsadlghkfghijfighjfijxcvxvxvxvc')"> Set Token1</button>
+      <button (click)="setDummy('35353dfsdfsdfxcvxcvwrqwegsdgdfgdfgdgf')"> Set Token2</button>
     </div>
   </ion-scroll>
 </div>

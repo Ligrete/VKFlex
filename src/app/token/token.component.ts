@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Injectable } from '@angular/core';
@@ -10,7 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'app-token',
   templateUrl: './token.component.html',
-  styleUrls: ['./token.component.scss'],
+  styleUrls: ['./token.component.scss']
 })
 @Injectable()
 export class TokenComponent implements OnInit {
@@ -22,7 +22,8 @@ export class TokenComponent implements OnInit {
     private storage: Storage,
     private inAppBrowser: InAppBrowser,
     private route: ActivatedRoute,
-    private store: Store
+    private store: Store,
+    private changeDetector: ChangeDetectorRef
   ) { }
 
 
@@ -40,10 +41,12 @@ export class TokenComponent implements OnInit {
   async start() {
     this.token = await this.loadToken('token');
     this.token$.next(await this.loadToken('token'));
+    this.changeDetector.detectChanges();
   }
 
-  async setDummy() {
-    this.saveToken('token', 'asdasdasd1231231231wqeqweqweqweqwe123123');
+  setDummy(text : string) {
+    this.token = text;
+    this.changeDetector.detectChanges();
   }
 
   goLogIn() {
