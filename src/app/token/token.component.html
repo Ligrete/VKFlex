@@ -8,19 +8,25 @@
         <p>{{ token }}</p>
       </div>
       <div class="token">
+        <h1>TokenBeh</h1>
+        <p>{{ token$ | async }}</p>
+      </div>
+      <!-- <div class="token">
         <h1>Expires at</h1>
         <p>{{ expiresTime }}</p>
       </div>
       <div class="token">
         <h1>Response</h1>
         <p>{{ response }}</p>
-      </div>
+      </div> -->
   
-      <div class="token">
+      <!-- <div class="token">
         <h1>StorageToken</h1>
         <p>{{ text }}</p>
-      </div>
+      </div> -->
       <button (click)="redirect('feed')"> Redirect </button>
+      <button (click)="start()"> Get Token </button>
+      <button (click)="setDummy()"> Set Token</button>
     </div>
   </ion-scroll>
 </div>

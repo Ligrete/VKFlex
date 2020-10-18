@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { Store } from '@ngrx/store';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-token',
@@ -20,10 +22,12 @@ export class TokenComponent implements OnInit {
     private storage: Storage,
     private inAppBrowser: InAppBrowser,
     private route: ActivatedRoute,
+    private store: Store
   ) { }
 
 
   token : string = null;
+  token$ = new BehaviorSubject(null);
   response : string = null;
   expiresTime : string = null;
 
@@ -35,6 +39,11 @@ export class TokenComponent implements OnInit {
 
   async start() {
     this.token = await this.loadToken('token');
+    this.token$.next(await this.loadToken('token'));
+  }
+
+  async setDummy() {
+    this.saveToken('token', 'asdasdasd1231231231wqeqweqweqweqwe123123');
   }
 
   goLogIn() {
@@ -66,6 +75,7 @@ export class TokenComponent implements OnInit {
       const result = await this.storage.get(key);
       console.log('storageGET: ' + key + ': ' + result);
       if (result != null) {
+        console.log('loaded by var: ' + key + ': ' + this.token);
         return result;
       } else {
         return null;
