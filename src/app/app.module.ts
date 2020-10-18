@@ -11,9 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { StoreModule } from '@ngrx/store';
-import { RootStoreModule } from './store/root-store.module';
 import { CommonModule } from '@angular/common';
+import { ComponentsModule } from './modules/components.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +24,7 @@ import { CommonModule } from '@angular/common';
     AppRoutingModule,
     IonicStorageModule.forRoot(),
     HttpClientModule,
-    RootStoreModule
+    ComponentsModule
   ],
   providers: [
     InAppBrowser,

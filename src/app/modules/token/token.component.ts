@@ -4,8 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { Store } from '@ngrx/store';
 import { BehaviorSubject } from 'rxjs';
+import { browser } from 'protractor';
 
 @Component({
   selector: 'app-token',
@@ -22,17 +22,15 @@ export class TokenComponent implements OnInit {
     private storage: Storage,
     private inAppBrowser: InAppBrowser,
     private route: ActivatedRoute,
-    private store: Store,
     private changeDetector: ChangeDetectorRef
   ) { }
 
 
   token : string = null;
-  token$ = new BehaviorSubject(null);
-  response : string = null;
-  expiresTime : string = null;
+  // token$ = new BehaviorSubject(null);
 
-  text : string = null;
+  
+
 
   ngOnInit() {
     this.start();
@@ -40,23 +38,27 @@ export class TokenComponent implements OnInit {
 
   async start() {
     this.token = await this.loadToken('token');
-    this.token$.next(await this.loadToken('token'));
+    this.goLogIn();
     this.changeDetector.detectChanges();
   }
 
-  setDummy(text : string) {
-    this.token = text;
-    this.changeDetector.detectChanges();
-  }
 
   goLogIn() {
-    const browser = this.inAppBrowser.create('https://oauth.vk.com/authorize?client_id=7628926&display=page&redirect_uri=http://localhost:8100/&scope=wall&response_type=token&v=5.124&state=123456');
+    var options = "location=yes,hidden=yes";
+    const browser = this.inAppBrowser.create('https://oauth.vk.com/authorize?client_id=7628926&display=page&redirect_uri=http://localhost:8100/&scope=wall&response_type=token&v=5.124&state=123456', null, options);
+    browser.on('beforeload').subscribe(event => {
+      browser.hide();
+      console.log('search log: '+ event.url.search('access_token'));
+    });
+
     browser.on('loadstop').subscribe(event => {
-      //browser.hide();
+      browser.hide();
       console.log('search log: '+ event.url.search('access_token'));
       if(event.url.search('access_token')>0 && event.url) { 
         this.getToken(event.url);
         browser.close();
+      } else {
+        browser.show();
       }
     });
   }
@@ -103,10 +105,8 @@ export class TokenComponent implements OnInit {
 
   getToken ( rawUrl : string) {
     let urlp  = new URLSearchParams(rawUrl);
-    this.expiresTime = urlp.get('expires_in');
     var urlraw = new URL(rawUrl).hash;
     this.token = new URLSearchParams(urlraw).get('#access_token');
-    this.response = urlraw;
     if (this.token!='' && this.token!=null) {
       this.saveToken('token', this.token);
       this.redirectPage();

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { FeedComponent } from './modules/main/feed/feed.component';
-import { TokenComponent } from './token/token.component';
+import { TokenComponent } from './modules/token/token.component';
 
 const routes: Routes = [
   { path: '', component: TokenComponent },
