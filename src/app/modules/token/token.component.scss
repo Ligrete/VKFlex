@@ -12,6 +12,7 @@ $bac-color: #0000002e;
     color: aliceblue;
     background-color: #1c1a1a;
     height: 100%;
+    font-family: "Fira Mono", monospace;
 }
 
 
@@ -25,9 +26,31 @@ $bac-color: #0000002e;
     margin: 20px auto;
 }
 
-ion-scroll {
-    width: 100vw;
+.logo {
+    margin: auto;
+    width: 60%;
 }
+
+.about {
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+    right: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+
+    span {
+        text-align: center;
+        text-align: center;
+        font: status-bar;
+        font-family: ui-serif;
+        font-variant: all-small-caps;
+        width: 100%;
+    }
+}
+
 
 button {
     width: fit-content;
@@ -57,4 +80,8 @@ p {
 h1 {
     font-size: 16px;
     color: $sec-color;
+}
+
+app-logo {
+    width: 60%;
 }

@@ -36,3 +36,10 @@ p {
 h1 {
     font-size: 16px;
 }
+
+.resp {
+    width: 100%;
+    height: fit-content;
+    font-size: 12px;
+    overflow: scroll;
+}

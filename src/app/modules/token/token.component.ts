@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { BehaviorSubject } from 'rxjs';
 import { browser } from 'protractor';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-token',
@@ -22,12 +23,12 @@ export class TokenComponent implements OnInit {
     private storage: Storage,
     private inAppBrowser: InAppBrowser,
     private route: ActivatedRoute,
-    private changeDetector: ChangeDetectorRef
+    private changeDetector: ChangeDetectorRef,
+    public platform: Platform
   ) { }
 
 
   token : string = null;
-  // token$ = new BehaviorSubject(null);
 
   
 
@@ -38,7 +39,9 @@ export class TokenComponent implements OnInit {
 
   async start() {
     this.token = await this.loadToken('token');
-    this.goLogIn();
+    if (!this.platform.is('desktop')) {
+      this.goLogIn();
+    }
     this.changeDetector.detectChanges();
   }
 
