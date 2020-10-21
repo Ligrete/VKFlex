@@ -26,7 +26,9 @@ export class VkApiService {
      * Get auth token for user
      * @return An `Observable` of the `JSONAPIAccountsResponse`.
      */
-    getAccounts(): Observable<any> {
+    getFeed(
+      token: string
+    ): Observable<any> {
         return this.http.get(`${this.hostauth}${this.appid}&display=page&redirect_uri=http://localhost:8100/&scope=wall&response_type=token&${this.ver}`);
     }
 

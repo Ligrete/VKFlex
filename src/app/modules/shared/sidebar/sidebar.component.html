@@ -1,0 +1,19 @@
+
+
+<div class="sidebar" [ngClass]="activeBar ? 'sidebar_on':'sidebar_off'">
+    <div class="header">
+        <div class="avatar"> NONE </div>
+        <div class="userdata">
+            <div class="text username"> {{firstName ? firstName  : 'nulldata'}} {{lastName ? lastName  : 'nulldata'}}</div>
+            <div class="text id"> @{{id ? id : 'nulldata'}}</div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="dock">
+    <div class="toggle" (click)="toggleBar()">
+        {{id}}
+    </div>
+</div>

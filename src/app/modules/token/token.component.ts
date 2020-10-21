@@ -48,7 +48,7 @@ export class TokenComponent implements OnInit {
 
   goLogIn() {
     var options = "location=yes,hidden=yes";
-    const browser = this.inAppBrowser.create('https://oauth.vk.com/authorize?client_id=7628926&display=page&redirect_uri=http://localhost:8100/&scope=wall&response_type=token&v=5.124&state=123456', null, options);
+    const browser = this.inAppBrowser.create('https://oauth.vk.com/authorize?client_id=7628926&display=page&redirect_uri=http://localhost:8100/&scope=wall,friends&response_type=token&v=5.124&state=123456', null, options);
     browser.on('beforeload').subscribe(event => {
       browser.hide();
       console.log('search log: '+ event.url.search('access_token'));

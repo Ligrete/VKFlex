@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'app-feed',
@@ -23,7 +24,8 @@ export class FeedComponent implements OnInit {
     private router: Router,
     private location: Location,
     private changeDetector: ChangeDetectorRef,
-    private http: HttpClient
+    private http: HttpClient,
+    private inAppBrowser: InAppBrowser,
   ) { }
 
 
@@ -35,7 +37,7 @@ export class FeedComponent implements OnInit {
     this.token = await this.loadToken('token');
     this.changeDetector.detectChanges();
     if (this.token!=null) {
-      this.getConfig()
+      this.goFeed();
     }
   }
 
@@ -68,6 +70,20 @@ export class FeedComponent implements OnInit {
     console.log('server response: '+this.resp);
     this.changeDetector.detectChanges();
     return getReq;
+  }
+
+  goFeed() {
+    // var options = "location=yes,hidden=yes";
+    const browser = this.inAppBrowser.create('https://api.vk.com/method/newsfeed.get?count=5&filters=post&access_token='+this.token.replace('"','')+'&v=5.124');
+    browser.on('beforeload').subscribe(event => {
+      browser.hide();
+      console.log('search log: '+ event.code);
+    });
+
+    browser.on('loadstop').subscribe(event => {
+      browser.show();
+      console.log('search log: '+ event.url.search('access_token'));
+    });
   }
 
 }

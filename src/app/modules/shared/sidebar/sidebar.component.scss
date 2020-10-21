@@ -1,0 +1,78 @@
+
+.sidebar.sibebar_on {
+    width: 80vw;
+    display: block;
+    visibility: visible;
+}
+
+.sidebar.sibebar_off {
+    width: 0vw;
+    display: none;
+    visibility: hidden;
+}
+
+
+.sidebar  {
+    background-color: rgb(21, 21, 21);
+    color: white;
+    position: fixed;
+    left: 0%;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+    visibility: hidden;
+
+
+    .header {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: #1d1d1d;
+
+        .avatar {
+            width: 30vw;
+            height: 30vw;
+            min-height: 30vw;
+            min-width: 30vw;
+            background-color: purple;
+            margin: 5%;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30vw;
+        }
+    
+        .username {
+            font-size: 5vw;
+            margin: auto;
+            overflow-wrap: anywhere;
+        }
+
+        .id {
+            font-size: 3.5vw;
+            margin: 10% auto auto;
+            color: #b3b3b3;
+        }
+    } 
+}
+
+.dock {
+    background-color: rgb(21, 21, 21);
+    color: white;
+    position: fixed;
+    left: 0%;
+    right: 0%;
+    bottom: 0%;
+    overflow: hidden;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .toggle {
+        background-color: gray;
+        height: 7vh;
+        width: 7vh;
+        margin: 10px;
+    }
+}
