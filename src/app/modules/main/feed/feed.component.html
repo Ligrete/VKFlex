@@ -1,13 +1,17 @@
-<div class="container">
-  <ion-scroll scrollX="true" scrollY="true">
-    <div class="content">
-      <div class="text">FEED</div>
-      <div class="token">
-        <h1>Token</h1>
-        <p>{{ token }}</p>
-      </div>
-      <button (click)="goBack()"> Go Back</button>
+<app-sidebar></app-sidebar> 
 
+<div class="container">
+  <div class="content">
+    <div class="text">FEED</div>
+    <div class="token">
+      <h1>Token</h1>
+      <p>{{ token }}</p>
     </div>
-  </ion-scroll>
+    <button (click)="goBack()"> Go Back</button>
+
+    <div class="resp">
+      {{resp}}
+    </div>
+
+  </div>
 </div>

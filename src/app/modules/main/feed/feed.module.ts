@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FeedComponent } from './feed.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { RouterModule } from '@angular/router';
+import { SidebarComponent } from '../../shared/sidebar/sidebar.component';
+import { SidebarModule } from '../../shared/sidebar/sidebar.module';
 
 
 
@@ -11,7 +13,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    SidebarModule
   ]
 })
 export class FeedModule { }

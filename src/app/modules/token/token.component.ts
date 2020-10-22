@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { BehaviorSubject } from 'rxjs';
 import { browser } from 'protractor';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-token',
@@ -22,12 +23,12 @@ export class TokenComponent implements OnInit {
     private storage: Storage,
     private inAppBrowser: InAppBrowser,
     private route: ActivatedRoute,
-    private changeDetector: ChangeDetectorRef
+    private changeDetector: ChangeDetectorRef,
+    public platform: Platform
   ) { }
 
 
   token : string = null;
-  // token$ = new BehaviorSubject(null);
 
   
 
@@ -38,14 +39,16 @@ export class TokenComponent implements OnInit {
 
   async start() {
     this.token = await this.loadToken('token');
-    this.goLogIn();
+    if (!this.platform.is('desktop')) {
+      this.goLogIn();
+    }
     this.changeDetector.detectChanges();
   }
 
 
   goLogIn() {
     var options = "location=yes,hidden=yes";
-    const browser = this.inAppBrowser.create('https://oauth.vk.com/authorize?client_id=7628926&display=page&redirect_uri=http://localhost:8100/&scope=wall&response_type=token&v=5.124&state=123456', null, options);
+    const browser = this.inAppBrowser.create('https://oauth.vk.com/authorize?client_id=7628926&display=page&redirect_uri=http://localhost:8100/&scope=wall,friends&response_type=token&v=5.124&state=123456', null, options);
     browser.on('beforeload').subscribe(event => {
       browser.hide();
       console.log('search log: '+ event.url.search('access_token'));

@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  vkapi: 'https://api.vk.com/method/',
+  vkauth: 'https://oauth.vk.com/authorize?',
+  appid: 'client_id=7628926&',
+  ver: '&v=5.124&state=123456',
+  
 };
 
 /*
